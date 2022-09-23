@@ -32,25 +32,25 @@ namespace TodoList.WebApi.Controllers
         }
 
         [HttpGet("{id}", Name = "GetTodoListItem")]
-        public ActionResult GetTodoListItem(int id)
+        public ActionResult<TodoListItem> GetTodoListItem(int id)
         {
             var item = s_todoListItems.Find(x => x.Id == id);
-            return item == null ? BadRequest("Item not found") : Ok(item);
+            return item == null ? NotFound("Item not found") : Ok(item);
         }
 
         [HttpPost(Name = "AddTodoListItem")]
-        public ActionResult AddTodoListItem(TodoListItem item)
+        public ActionResult<List<TodoListItem>> AddTodoListItem(TodoListItem item)
         {
             s_todoListItems.Add(item);
             return Ok(s_todoListItems);
         }
 
         [HttpPut(Name = "UpdateTodoListItem")]
-        public ActionResult UpdateTodoListItem(TodoListItem request)
+        public ActionResult<TodoListItem> UpdateTodoListItem(TodoListItem request)
         {
             var item = s_todoListItems.Find(x => x.Id == request.Id);
             if (item == null)
-                return BadRequest("Item not found");
+                return NotFound("Item not found");
             item.TodoTask = request.TodoTask;
             item.IsDone = request.IsDone;
             item.ScheduledTime = request.ScheduledTime;
@@ -58,11 +58,11 @@ namespace TodoList.WebApi.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteTodoListItem")]
-        public ActionResult DeleteTodoListItem(int id)
+        public ActionResult<TodoListItem> DeleteTodoListItem(int id)
         {
             var item = s_todoListItems.Find(x => x.Id == id);
             if (item == null)
-                return BadRequest("Item not found");
+                return NotFound("Item not found");
             s_todoListItems.Remove(item);
             return Ok(item);
         }
