@@ -29,9 +29,9 @@ namespace TodoList.WebApi.Controllers
                 var item = s_repository.GetTodoListItem(id);
                 return Ok(item);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return NotFound(e.Message);
+                return BadRequest();
             }
         }
 
@@ -43,9 +43,9 @@ namespace TodoList.WebApi.Controllers
                 s_repository.Create(item);
                 return Ok(s_repository.GetTodoListItem(item.Id));
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest(e.Message);
+                return BadRequest();
             }
         }
 
@@ -57,9 +57,9 @@ namespace TodoList.WebApi.Controllers
                 s_repository.Update(item);
                 return Ok(s_repository.GetTodoListItem(item.Id));
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return NotFound(e.Message);
+                return NotFound();
             }
         }
 
@@ -71,9 +71,9 @@ namespace TodoList.WebApi.Controllers
                 s_repository.Delete(id);
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return NotFound(e.Message);
+                return NotFound();
             }
         }
     }
