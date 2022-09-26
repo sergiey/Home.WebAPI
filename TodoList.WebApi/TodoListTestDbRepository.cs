@@ -1,4 +1,6 @@
-﻿using TodoList.WebApi.Model;
+﻿using System.Web.Http;
+using System.Net;
+using TodoList.WebApi.Model;
 
 namespace TodoList.WebApi
 {
@@ -35,14 +37,16 @@ namespace TodoList.WebApi
         public TodoListItem GetTodoListItem(int id)
         {
             var item = _todoListItems.Find(x => x.Id == id);
-            return item == null ? throw new Exception("Item not found") : item;
+            if (item == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+             return item;
         }
 
         public void Create(TodoListItem request)
         {
             var item = _todoListItems.Find(x => x.Id == request.Id);
             if (item != null)
-                throw new Exception($"Item {request.Id} already exist");
+                throw new HttpResponseException(HttpStatusCode.Conflict);
             _todoListItems.Add(request);
         }
 
@@ -50,7 +54,7 @@ namespace TodoList.WebApi
         {
             var item = _todoListItems.Find(x => x.Id == request.Id);
             if (item == null)
-                throw new Exception("Item not found");
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             item.TodoTask = request.TodoTask;
             item.IsDone = request.IsDone;
             item.ScheduledTime = request.ScheduledTime;
@@ -60,7 +64,7 @@ namespace TodoList.WebApi
         {
             var item = _todoListItems.Find(x => x.Id == id);
             if (item == null)
-                throw new Exception("Item not found");
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             _todoListItems.Remove(item);
         }
     }
