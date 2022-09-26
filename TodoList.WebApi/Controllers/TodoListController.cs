@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TodoList.WebApi.Model;
 
 namespace TodoList.WebApi.Controllers
 {
@@ -7,64 +8,73 @@ namespace TodoList.WebApi.Controllers
     [ApiController]
     public class TodoListController : ControllerBase
     {
-        private static List<TodoListItem> s_todoListItems = new List<TodoListItem>
+        private static IRepository<TodoListItem> s_repository;
+
+        public TodoListController(IRepository<TodoListItem> repository)
         {
-            new TodoListItem
-            {
-                Id = 1,
-                TodoTask = "Buy some milk",
-                IsDone = false,
-                ScheduledTime = new DateTime(2022, 09, 01)
-            },
-            new TodoListItem
-            {
-                Id = 2,
-                TodoTask = "Do workout",
-                IsDone = false,
-                ScheduledTime = new DateTime(2022, 09, 02)
-            }
-        };
+            s_repository = repository;
+        }
 
         [HttpGet(Name = "GetTodoList")]
-        public ActionResult<List<TodoListItem>> GetTodoList()
+        public IActionResult GetTodoList()
         {
-            return Ok(s_todoListItems);
+            return Ok(s_repository.GetTodoList());
         }
 
         [HttpGet("{id}", Name = "GetTodoListItem")]
-        public ActionResult<TodoListItem> GetTodoListItem(int id)
+        public IActionResult GetTodoListItem(int id)
         {
-            var item = s_todoListItems.Find(x => x.Id == id);
-            return item == null ? NotFound("Item not found") : Ok(item);
+            try
+            {
+                var item = s_repository.GetTodoListItem(id);
+                return Ok(item);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpPost(Name = "AddTodoListItem")]
-        public ActionResult<List<TodoListItem>> AddTodoListItem(TodoListItem item)
+        public IActionResult AddTodoListItem(TodoListItem item)
         {
-            s_todoListItems.Add(item);
-            return Ok(s_todoListItems);
+            try
+            {
+                s_repository.Create(item);
+                return Ok(s_repository.GetTodoListItem(item.Id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut(Name = "UpdateTodoListItem")]
-        public ActionResult<TodoListItem> UpdateTodoListItem(TodoListItem request)
+        public IActionResult UpdateTodoListItem(TodoListItem item)
         {
-            var item = s_todoListItems.Find(x => x.Id == request.Id);
-            if (item == null)
-                return NotFound("Item not found");
-            item.TodoTask = request.TodoTask;
-            item.IsDone = request.IsDone;
-            item.ScheduledTime = request.ScheduledTime;
-            return Ok(item);
+            try
+            {
+                s_repository.Update(item);
+                return Ok(s_repository.GetTodoListItem(item.Id));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpDelete("{id}", Name = "DeleteTodoListItem")]
-        public ActionResult<TodoListItem> DeleteTodoListItem(int id)
+        public IActionResult DeleteTodoListItem(int id)
         {
-            var item = s_todoListItems.Find(x => x.Id == id);
-            if (item == null)
-                return NotFound("Item not found");
-            s_todoListItems.Remove(item);
-            return Ok(item);
+            try
+            {
+                s_repository.Delete(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

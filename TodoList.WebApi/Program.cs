@@ -1,3 +1,5 @@
+using TodoList.WebApi.Model;
+
 namespace TodoList.WebApi
 {
     public class Program
@@ -9,6 +11,8 @@ namespace TodoList.WebApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddSingleton<IRepository<TodoListItem>, TodoListTestDbRepository>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
