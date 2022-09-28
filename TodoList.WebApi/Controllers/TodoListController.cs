@@ -8,17 +8,17 @@ namespace TodoList.WebApi.Controllers
     [ApiController]
     public class TodoListController : ControllerBase
     {
-        private static IRepository<TodoListItem> s_repository;
+        private readonly IRepository<TodoListItem> _repository;
 
         public TodoListController(IRepository<TodoListItem> repository)
         {
-            s_repository = repository;
+            _repository = repository;
         }
 
         [HttpGet(Name = "GetTodoList")]
         public IActionResult GetTodoList()
         {
-            return Ok(s_repository.GetTodoList());
+            return Ok(_repository.GetTodoList());
         }
 
         [HttpGet("{id}", Name = "GetTodoListItem")]
@@ -26,7 +26,7 @@ namespace TodoList.WebApi.Controllers
         {
             try
             {
-                var item = s_repository.GetTodoListItem(id);
+                var item = _repository.GetTodoListItem(id);
                 return Ok(item);
             }
             catch (Exception)
@@ -40,8 +40,8 @@ namespace TodoList.WebApi.Controllers
         {
             try
             {
-                s_repository.Create(item);
-                return Ok(s_repository.GetTodoListItem(item.Id));
+                _repository.Create(item);
+                return Ok(_repository.GetTodoListItem(item.Id));
             }
             catch (Exception)
             {
@@ -54,8 +54,8 @@ namespace TodoList.WebApi.Controllers
         {
             try
             {
-                s_repository.Update(item);
-                return Ok(s_repository.GetTodoListItem(item.Id));
+                _repository.Update(item);
+                return Ok(_repository.GetTodoListItem(item.Id));
             }
             catch (Exception)
             {
@@ -68,7 +68,7 @@ namespace TodoList.WebApi.Controllers
         {
             try
             {
-                s_repository.Delete(id);
+                _repository.Delete(id);
                 return Ok();
             }
             catch (Exception)
