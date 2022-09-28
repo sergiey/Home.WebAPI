@@ -6,11 +6,16 @@ namespace TodoList.WebApi
 {
     public class TodoListTestDbRepository : IRepository<TodoListItem>
     {
-        private List<TodoListItem> _todoListItems;
+        private readonly List<TodoListItem> _todoListItems;
 
         public TodoListTestDbRepository()
         {
-            _todoListItems = new List<TodoListItem>()
+            _todoListItems = InitTodoListItems();
+        }
+
+        private List<TodoListItem> InitTodoListItems()
+        {
+            return new List<TodoListItem>()
             {
                 new TodoListItem
                 {
