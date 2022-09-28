@@ -4,10 +4,10 @@
     {
         public int Id { get; set; }
 
-        public string TodoTask { get; set; } = string.Empty;
+        public string TodoTask { get; set; }
 
-        public bool IsDone { get; set; } = false;
+        public bool IsDone { get; set; }
 
-        public DateTime ScheduledTime { get; set; } = DateTime.Now;
+        public DateTime ScheduledTime { get; set; }
     }
 }
