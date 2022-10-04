@@ -7,11 +7,13 @@ namespace TodoList.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = "Server=localhost;Database=todolist;Encrypt=False;Trusted_Connection=True;";
 
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddSingleton<IRepository<TodoListItem>, TodoListTestDbRepository>();
+            builder.Services.AddTransient<IRepository<TodoListItem>, TodoListSqlServerDbRepository>
+                (x => new TodoListSqlServerDbRepository(connectionString));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
