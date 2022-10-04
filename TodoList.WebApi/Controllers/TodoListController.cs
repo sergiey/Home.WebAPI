@@ -41,7 +41,7 @@ namespace TodoList.WebApi.Controllers
             try
             {
                 _repository.Create(item);
-                return Ok(_repository.GetTodoListItem(item.Id));
+                return Ok();
             }
             catch (Exception)
             {
@@ -55,7 +55,7 @@ namespace TodoList.WebApi.Controllers
             try
             {
                 _repository.Update(item);
-                return Ok(_repository.GetTodoListItem(item.Id));
+                return Ok();
             }
             catch (Exception)
             {
