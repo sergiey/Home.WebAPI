@@ -21,7 +21,10 @@ namespace TodoList.WebApi
         {
             using IDbConnection db = new NpgsqlConnection(_connectionString);
             var sqlQuery = @"
-                SELECT * 
+                SELECT ""Id"",
+                       ""TodoTask"",
+                       ""IsDone"",
+                       ""ScheduledTime"" 
                 FROM ""TodoListItems""";
             return db.Query<TodoListItem>(sqlQuery);
         }
@@ -30,7 +33,10 @@ namespace TodoList.WebApi
         {
             using IDbConnection db = new NpgsqlConnection(_connectionString);
             var sqlQuery = @"
-                SELECT * 
+                SELECT ""Id"",
+                       ""TodoTask"",
+                       ""IsDone"",
+                       ""ScheduledTime""
                 FROM ""TodoListItems""
                 WHERE ""Id"" = @id";
             var item = db.Query<TodoListItem>(sqlQuery, new { id }).FirstOrDefault();
@@ -59,7 +65,10 @@ namespace TodoList.WebApi
         {
             using IDbConnection db = new NpgsqlConnection(_connectionString);
             var sqlQuery = @" 
-                SELECT * 
+                SELECT ""Id"",
+                       ""TodoTask"",
+                       ""IsDone"",
+                       ""ScheduledTime"" 
                 FROM ""TodoListItems""
                 WHERE ""Id"" = @id";
             var request = db.Query<TodoListItem>(sqlQuery, new { item.Id }).FirstOrDefault();
@@ -79,7 +88,10 @@ namespace TodoList.WebApi
         {
             using IDbConnection db = new NpgsqlConnection(_connectionString);
             var sqlQuery = @"
-                SELECT *
+                SELECT ""Id"",
+                       ""TodoTask"",
+                       ""IsDone"",
+                       ""ScheduledTime""
                 FROM ""TodoListItems""
                 WHERE ""Id"" = @id";
             var request = db.Query<TodoListItem>(sqlQuery, new { id }).FirstOrDefault();
