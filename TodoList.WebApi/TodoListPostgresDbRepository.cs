@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Options;
 using Npgsql;
 using System.Data;
 using System.Net;
@@ -9,11 +10,11 @@ namespace TodoList.WebApi
 {
     public class TodoListPostgresDbRepository : IRepository<TodoListItem>
     {
-        private string _connectionString;
+        private readonly string _connectionString;
 
-        public TodoListPostgresDbRepository(string connectionString)
+        public TodoListPostgresDbRepository(IOptions<TodoListWebApiOptions> options)
         {
-            _connectionString = connectionString;
+            _connectionString = options.Value.ConnectionString;
         }
 
         public IEnumerable<TodoListItem> GetTodoList()
