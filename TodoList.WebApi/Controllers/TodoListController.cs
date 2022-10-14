@@ -22,7 +22,7 @@ namespace TodoList.WebApi.Controllers
         }
 
         [HttpGet("{id}", Name = "GetTodoListItem")]
-        public IActionResult GetTodoListItem(int id)
+        public IActionResult GetTodoListItem(Guid id)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace TodoList.WebApi.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteTodoListItem")]
-        public IActionResult DeleteTodoListItem(int id)
+        public IActionResult DeleteTodoListItem(Guid id)
         {
             try
             {
