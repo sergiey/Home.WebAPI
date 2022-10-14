@@ -19,14 +19,14 @@ namespace TodoList.WebApi
             {
                 new TodoListItem
                 {
-                    Id = 1,
+                    Id = new Guid(),
                     TodoTask = "Buy some milk",
                     IsDone = false,
                     ScheduledTime = new DateTime(2022, 09, 01)
                 },
                 new TodoListItem
                 {
-                    Id = 2,
+                    Id = new Guid(),
                     TodoTask = "Do workout",
                     IsDone = false,
                     ScheduledTime = new DateTime(2022, 09, 02)
@@ -39,7 +39,7 @@ namespace TodoList.WebApi
             return _todoListItems;
         }
 
-        public TodoListItem GetTodoListItem(int id)
+        public TodoListItem GetTodoListItem(Guid id)
         {
             var item = _todoListItems.Find(x => x.Id == id);
             if (item == null)
@@ -65,7 +65,7 @@ namespace TodoList.WebApi
             item.ScheduledTime = request.ScheduledTime;
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var item = _todoListItems.Find(x => x.Id == id);
             if (item == null)

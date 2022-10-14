@@ -22,7 +22,7 @@ namespace TodoList.WebApi
             return db.Query<TodoListItem>("select * from TodoListItems");
         }
 
-        public TodoListItem? GetTodoListItem(int id)
+        public TodoListItem? GetTodoListItem(Guid id)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
             var item = db.Query<TodoListItem>("select * from TodoListItems where Id = @id",
@@ -50,7 +50,7 @@ namespace TodoList.WebApi
                 "ScheduledTime = @ScheduledTime where Id = @Id", item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
             var request = db.Query<TodoListItem>("select * from TodoListItems where Id = @id",

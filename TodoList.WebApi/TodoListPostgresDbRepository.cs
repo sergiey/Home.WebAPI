@@ -29,7 +29,7 @@ namespace TodoList.WebApi
             return db.Query<TodoListItem>(sqlQuery);
         }
 
-        public TodoListItem? GetTodoListItem(int id)
+        public TodoListItem? GetTodoListItem(Guid id)
         {
             using IDbConnection db = new NpgsqlConnection(_connectionString);
             var sqlQuery = @"
@@ -84,7 +84,7 @@ namespace TodoList.WebApi
             db.Execute(sqlQuery, item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             using IDbConnection db = new NpgsqlConnection(_connectionString);
             var sqlQuery = @"

@@ -4,12 +4,12 @@
     {
         IEnumerable<T> GetTodoList();
 
-        T? GetTodoListItem(int id);
+        T? GetTodoListItem(Guid id);
 
         void Create(T item);
 
         void Update(T item);
 
-        void Delete(int id);
+        void Delete(Guid id);
     }
 }
