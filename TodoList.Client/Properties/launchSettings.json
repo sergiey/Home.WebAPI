@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TodoList.Client": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Uri": "https://localhost:7153/api/TodoList/"
+      }
+    }
+  }
+}

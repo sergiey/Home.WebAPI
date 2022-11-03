@@ -8,7 +8,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoList.WebApi", "TodoList
 		{2D9030C1-4F2E-40DA-A3EC-68F9D4E08CB5} = {2D9030C1-4F2E-40DA-A3EC-68F9D4E08CB5}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.DbScripts", "TodoList.DbScripts\TodoList.DbScripts.csproj", "{2D9030C1-4F2E-40DA-A3EC-68F9D4E08CB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoList.DbScripts", "TodoList.DbScripts\TodoList.DbScripts.csproj", "{2D9030C1-4F2E-40DA-A3EC-68F9D4E08CB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoList.Client", "TodoList.Client\TodoList.Client.csproj", "{AE6258E4-CABF-4045-8AF1-9309DE777BEC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{88B820B5-3816-4322-A18B-2E429540CE3B} = {88B820B5-3816-4322-A18B-2E429540CE3B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +29,10 @@ Global
 		{2D9030C1-4F2E-40DA-A3EC-68F9D4E08CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D9030C1-4F2E-40DA-A3EC-68F9D4E08CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D9030C1-4F2E-40DA-A3EC-68F9D4E08CB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE6258E4-CABF-4045-8AF1-9309DE777BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6258E4-CABF-4045-8AF1-9309DE777BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6258E4-CABF-4045-8AF1-9309DE777BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6258E4-CABF-4045-8AF1-9309DE777BEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
